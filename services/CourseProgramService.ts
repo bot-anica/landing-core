@@ -1,4 +1,4 @@
-import { LESSONS } from '../constants/courseProgram';
+import { LESSONS } from '../../constants/courseProgram';
 import { CourseProgramData, Lesson } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';

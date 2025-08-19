@@ -1,4 +1,4 @@
-import { FEATURES } from '../constants/features';
+import { FEATURES } from '../../constants/features';
 import { Feature, FeaturesSectionData } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';

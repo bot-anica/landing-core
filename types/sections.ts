@@ -84,7 +84,16 @@ export interface HeroTitle {
   additional: string;
 }
 
-export interface HeroMainData {
+export interface HeroImages {
+  extraLarge?: string,
+  large?: string,
+  medium?: string,
+  mediumVertical?: string,
+  small?: string,
+  smallVertical?: string,
+}
+
+export interface HeroData {
   title: HeroTitle;
   subtitle: string;
   benefits: string[];
@@ -92,10 +101,7 @@ export interface HeroMainData {
     primary: CTAItem;
     secondary: CTAItem;
   };
-}
-
-export interface HeroData {
-  data: HeroMainData,
+  images: Record<'rightImages' | 'imagesInText', HeroImages>;
   bgImages: PartialSectionBGImagesProps;
 }
 

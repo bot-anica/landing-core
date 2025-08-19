@@ -1,4 +1,4 @@
-import { COURSE_DESCRIPTION, FOOTER_NAVIAGTION_LINKS } from '../constants/footer';
+import { COURSE_DESCRIPTION, FOOTER_NAVIAGTION_LINKS } from '../../constants/footer';
 import { FooterData, LinkItem } from '../types/sections';
 
 export class FooterService {

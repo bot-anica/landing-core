@@ -1,4 +1,4 @@
-import { STATS } from '../constants/stats';
+import { STATS } from '../../constants/stats';
 import { Stat } from '../types/sections';
 
 export class StatsService {

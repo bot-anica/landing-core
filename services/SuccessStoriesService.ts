@@ -1,4 +1,4 @@
-import { STATISTIC, TESTIMONIALS, SUCCESS_STORIES_CTA_BLOCK } from '../constants/successStories';
+import { STATISTIC, TESTIMONIALS, SUCCESS_STORIES_CTA_BLOCK } from '../../constants/successStories';
 import { Statistic, SuccessStoriesCTABlock, SuccessStoriesData, Testimonial } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';

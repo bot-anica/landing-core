@@ -1,4 +1,4 @@
-import { HEADER_NAVIAGTION_LINKS, HEADER_CTA_BUTTONS } from '../constants/header';
+import { HEADER_NAVIAGTION_LINKS, HEADER_CTA_BUTTONS } from '../../constants/header';
 import { CTAItem, HeaderData, LinkItem } from '../types/sections';
 
 export class HeaderService {

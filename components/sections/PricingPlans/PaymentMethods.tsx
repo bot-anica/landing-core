@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { CURRENCIES } from '../../../constants/pricingPlans';
+import { CURRENCIES } from '../../../../constants/pricingPlans';
 import { CurrencyCode } from '../../../hooks/useAvailableCurrencies';
 
 interface PaymentMethodsProps {

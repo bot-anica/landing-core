@@ -1,5 +1,5 @@
 import { AVAILABLE_PAGES, PageSEOCongfig, SEOConfig, SEOData } from '../types/sections';
-import { DEFAULT_SEO_CONFIG, PAGE_SEO_CONFIGS } from '../constants/constants';
+import { DEFAULT_SEO_CONFIG, PAGE_SEO_CONFIGS } from '../../constants/common';
 
 export class SEOService {
   static getDefaultSEOConfig(): SEOConfig {

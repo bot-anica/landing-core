@@ -6,15 +6,13 @@ import { useHeroAnimations } from '../../../hooks/useHeroAnimations';
 import HeroCTA from './HeroCTA';
 import HeroBenefits from './HeroBenefits';
 import { SectionBackground, SectionSplitter } from '../../common';
-import HeroImageHorizontalSmall from '../../../assets/images/heroImage/HeroImageHorizontalSmall.png';
-import HeroImageHorizontalMiddle from '../../../assets/images/heroImage/HeroImageHorizontalMiddle.png';
-import HeroImageVerticalLarge from '../../../assets/images/heroImage/HeroImageVerticalLarge.png';
-import HeroImageVerticalExtraLarge from '../../../assets/images/heroImage/HeroImageVerticalExtraLarge.png';
 import HeroSubtitle from './HeroSubtitle';
 import HeroTitle from './HeroTitle';
+import HeroImageInText from './HeroImageInText';
+import HeroRightImage from './HeroRightImage';
 
 const Hero: FC = () => {
-  const { data, bgImages } = useHero();
+  const { title, subtitle, benefits, cta, images, bgImages } = useHero();
   const { containerVariants, itemVariants } = useHeroAnimations();
 
   return (
@@ -29,21 +27,19 @@ const Hero: FC = () => {
             initial="hidden"
             animate="visible"
           >
-            <HeroBenefits benefits={data.benefits} itemVariants={itemVariants} />
-            <div className="grid gap-12 md:gap-0 mb-12 lg:mt-4 lg:mb-4">
-              <HeroTitle title={data.title} itemVariants={itemVariants} />
-              <img src={HeroImageHorizontalSmall} alt="" className="block sm:hidden relative z-10" />
-              <img src={HeroImageHorizontalMiddle} alt="" className="hidden sm:block md:hidden relative z-10 m-auto" />
+            <HeroBenefits benefits={benefits} itemVariants={itemVariants} />
+            <div className="grid gap-12 mb-12 lg:mt-4 lg:mb-4">
+              <HeroTitle title={title} itemVariants={itemVariants} />
+              <HeroImageInText images={images.imagesInText} />
             </div>
 
             <div>
-              <HeroSubtitle subtitle={data.subtitle} itemVariants={itemVariants} />
-              <HeroCTA cta={data.cta} itemVariants={itemVariants} />
+              <HeroSubtitle subtitle={subtitle} itemVariants={itemVariants} />
+              <HeroCTA cta={cta} itemVariants={itemVariants} />
             </div>
           </motion.div>
         </div>
-        <img src={HeroImageVerticalLarge} alt="" className="hidden md:block lg:hidden relative z-10" />
-        <img src={HeroImageVerticalExtraLarge} alt="" className="hidden lg:block relative z-10" />
+        <HeroRightImage images={images.rightImages} />
       </div>
     </section>
   );
