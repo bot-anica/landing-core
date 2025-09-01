@@ -1,17 +1,18 @@
 import { motion } from 'framer-motion';
 import { Check, Loader2 } from 'lucide-react';
 import { Button, Card } from '../../common';
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { ButtonSize, ButtonVariant } from '../../../types/common';
-import { Tariff } from '../../../types/sections';
+import { Currency, Tariff } from '../../../types/sections';
 
 interface PricingPlanCardProps {
   plan: Tariff;
   isIntersecting: boolean;
   index: number;
+  selectedCurrency: Currency;
 }
 
-const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index }) => {
+const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index, selectedCurrency }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBuyButton = async () => {
@@ -49,8 +50,15 @@ const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index
     }
   }
 
-  const price = plan.prices[0];
+  const price = useMemo(() => {
+    return plan.prices.find(p => p.currency.code === selectedCurrency.code);
+  }, [plan.prices, selectedCurrency]);
+
   const features = plan.features.split('\n');
+
+  if (!price) {
+    return null; // Or some fallback UI
+  }
 
   return (
     <motion.div
@@ -73,11 +81,11 @@ const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index
         <div className="mb-2">
           {price.discount_price && (
             <span className="text-gray-400 line-through text-base sm:text-lg mr-2">
-              {+price.price} {price.currency.symbol}
+              {price.currency.symbol}{+price.price}
             </span>
           )}
-          <span className="text-3xl sm:text-4xl font-bold text-primary-pink">
-            {price.discount_price ? +price.discount_price : +price.price} {price.currency.symbol}
+          <span className="text-4xl sm:text-5xl font-bold text-primary-pink">
+            <span className="text-primary-pink/50">{price.currency.symbol}</span>{price.discount_price ? +price.discount_price : +price.price}
           </span>
         </div>
         <p className="italic text-gray-600 text-sm xl:text-base">
