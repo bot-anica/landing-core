@@ -256,3 +256,34 @@ export interface SEOData {
   defaultSEOConfig: SEOConfig;
   pageSEOConfigs: Record<AVAILABLE_PAGES, PageSEOCongfig>;
 }
+
+export interface Currency {
+  id: number;
+  name: string;
+  code: string;
+  symbol: string;
+}
+
+export interface TariffPrice {
+  id: number;
+  price: string;
+  discount_price?: string;
+  currency: Currency;
+}
+
+export interface Tariff {
+  id: number;
+  name: string;
+  description: string;
+  is_popular: boolean;
+  prices: TariffPrice[];
+  features: string;
+}
+
+export interface Course {
+  id: number;
+  name: string;
+  urlParam: string;
+  description: string;
+  tariffs: Tariff[];
+}

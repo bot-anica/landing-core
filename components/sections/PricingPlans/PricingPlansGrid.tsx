@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import PricingPlanCard from './PricingPlanCard';
-import { PricingPlan } from '../../../types/sections';
+import { Tariff } from '../../../types/sections';
 
 interface PricingPlansGridProps {
-  plans: PricingPlan[];
+  plans: Tariff[];
   isIntersecting: boolean;
 }
 

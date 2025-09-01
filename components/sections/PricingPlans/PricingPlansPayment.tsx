@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
-import { CurrencyCode } from '../../../hooks/useAvailableCurrencies';
+import { Currency } from '../../../types/sections';
 import PaymentMethods from './PaymentMethods';
 
 interface PricingPlansPaymentProps {
-  availableCurrencies: CurrencyCode[];
+  availableCurrencies: Currency[];
   isIntersecting: boolean;
 }
 

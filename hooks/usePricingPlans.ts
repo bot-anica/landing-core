@@ -1,14 +1,21 @@
 import { useMemo } from 'react';
-import { PricingService } from '../services/PricingService';
+import { useCourse } from './useCourse';
+import { SectionHeadersService } from '../services/SectionHeadersService';
+import { SectionBGImagesService } from '../services/SectionBGImagesService';
 
 export const usePricingPlans = () => {
-  const {header, plans, bgImages} = useMemo(() => {
-    return PricingService.getData();
+  const { course, loading } = useCourse();
+
+  const { header, bgImages } = useMemo(() => {
+    const header = SectionHeadersService.getHeader('pricingPlans');
+    const bgImages = SectionBGImagesService.getBGImages('pricingPlans');
+    return { header, bgImages };
   }, []);
 
   return {
     header,
-    plans,
-    bgImages
+    plans: course?.tariffs || [],
+    bgImages,
+    loading,
   };
 };
