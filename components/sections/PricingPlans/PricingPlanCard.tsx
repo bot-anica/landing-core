@@ -17,38 +17,7 @@ const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBuyButton = async () => {
-    try {
-      setIsLoading(true);
-      // In a real project, the URL should be in environment variables
-      const n8nWebhookUrl = (import.meta as any).env?.VITE_N8N_WEBHOOK_URL || 'https://your-n8n-url/render/webhook/pay';
-      const res = await fetch(`${n8nWebhookUrl}?tariff=${plan.id}`);
-
-      if (!res.ok) {
-        throw new Error(`API Error: ${res.status} ${res.statusText}`);
-      }
-
-      const data = await res.json();
-
-      if (!data.invoice_url) {
-        throw new Error('Invoice URL not received');
-      }
-
-      window.open(data.invoice_url, '_blank');
-    } catch (error) {
-      console.error('Error creating invoice:', error);
-
-      let errorMessage = 'Произошла ошибка при создании инвойса. Пожалуйста, попробуйте позже.';
-
-      if (error instanceof Error) {
-        if ((import.meta as any).env?.DEV) {
-          errorMessage += ` Детали: ${error.message}`;
-        }
-      }
-
-      alert(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
+    console.log("Should open pre-payment page")
   }
 
   const price = useMemo(() => {
