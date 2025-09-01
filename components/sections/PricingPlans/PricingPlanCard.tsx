@@ -3,16 +3,17 @@ import { Check, Loader2 } from 'lucide-react';
 import { Button, Card } from '../../common';
 import { FC, useState, useMemo } from 'react';
 import { ButtonSize, ButtonVariant } from '../../../types/common';
-import { Currency, Tariff } from '../../../types/sections';
+import { Currency, PartialSectionBGImagesProps, Tariff } from '../../../types/sections';
 
 interface PricingPlanCardProps {
   plan: Tariff;
   isIntersecting: boolean;
   index: number;
   selectedCurrency: Currency;
+  bgImages?: PartialSectionBGImagesProps;
 }
 
-const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index, selectedCurrency }) => {
+const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index, selectedCurrency, bgImages }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBuyButton = async () => {
@@ -65,22 +66,23 @@ const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index
       initial={{ opacity: 0, y: 30 }}
       animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      className={`relative h-full flex flex-col ${
-        plan.is_popular ? 'xl:scale-105' : ''
-      }`}
+      className="relative h-full flex flex-col"
     >
       <Card
         variant={plan.is_popular ? "elevated" : "default"}
         padding="lg"
         className="h-full flex flex-col"
+        childrenWrapperClassName="h-full flex flex-col"
+        bgImages={bgImages}
       >
-      <div className="text-center mb-6 xl:mb-8">
-        <h3 className="text-2xl sm:text-lg md:text-2xl lg:text-lg xl:text-2xl font-bold text-primary-dark mb-3 sm:mb-4">
+      <div className="flex-1">
+        <div className="text-center mb-6 xl:mb-8">
+        <h3 className="text-2xl sm:text-lg md:text-2xl lg:text-xl xl:text-2xl font-bold text-primary-dark mb-3 sm:mb-4">
           {plan.name}
         </h3>
         <div className="mb-2">
           {price.discount_price && (
-            <span className="text-gray-400 line-through text-base sm:text-lg mr-2">
+            <span className="text-gray-400 line-through font-light text-base sm:text-2xl mr-2">
               {price.currency.symbol}{+price.price}
             </span>
           )}
@@ -109,6 +111,7 @@ const PricingPlanCard: FC<PricingPlanCardProps> = ({ plan, isIntersecting, index
           </motion.li>
         ))}
       </ul>
+      </div>
       <div className="mt-auto">
         <Button
           variant={plan.is_popular ? ButtonVariant.PRIMARY : ButtonVariant.SECONDARY}

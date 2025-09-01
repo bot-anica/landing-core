@@ -2,12 +2,14 @@ import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import { Currency } from '../../../types/sections';
 import PaymentMethods from './PaymentMethods';
+import PaymentMethodsSkeleton from './PaymentMethodsSkeleton';
 
 interface PricingPlansPaymentProps {
   availableCurrencies: Currency[];
   isIntersecting: boolean;
   selectedCurrency: Currency | null;
   onCurrencyChange: (currency: Currency) => void;
+  loading: boolean;
 }
 
 const PricingPlansPayment: React.FC<PricingPlansPaymentProps> = ({ 
@@ -15,6 +17,7 @@ const PricingPlansPayment: React.FC<PricingPlansPaymentProps> = ({
   isIntersecting,
   selectedCurrency,
   onCurrencyChange,
+  loading
 }) => {
   return (
     <>
@@ -28,11 +31,15 @@ const PricingPlansPayment: React.FC<PricingPlansPaymentProps> = ({
         <p className="text-gray-600">
           Цены указаны в долларах США. Для оплаты можете использовать
         </p>
-        <PaymentMethods 
-          currencies={availableCurrencies} 
-          selectedCurrency={selectedCurrency}
-          onCurrencyChange={onCurrencyChange}
-        />
+        {loading ? (
+          <PaymentMethodsSkeleton />
+        ) : (
+          <PaymentMethods 
+            currencies={availableCurrencies} 
+            selectedCurrency={selectedCurrency}
+            onCurrencyChange={onCurrencyChange}
+          />
+        )}
       </motion.div>
 
       {/* Quality Guarantee */}

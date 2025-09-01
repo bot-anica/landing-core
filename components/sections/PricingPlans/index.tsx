@@ -8,15 +8,15 @@ import { Currency } from '../../../types/sections';
 
 const PricingPlans: FC = () => {
   const [ref, isIntersecting] = useIntersectionObserver() as [React.RefObject<HTMLElement>, boolean];
-  const { header, plans, bgImages, loading } = usePricingPlans();
+  const { header, plans, bgImages, pricingPlansPopularBgImages, loading } = usePricingPlans();
   const [selectedCurrency, setSelectedCurrency] = useState<Currency | null>(null);
 
   const availableCurrencies = useMemo((): Currency[] => {
-    if (!plans || plans.length === 0) {
+    if (loading || !plans || plans.length === 0) {
       return [];
     }
     return plans[0].prices.map(price => price.currency);
-  }, [plans]);
+  }, [plans, loading]);
 
   useEffect(() => {
     if (availableCurrencies.length > 0 && !selectedCurrency) {
@@ -37,6 +37,8 @@ const PricingPlans: FC = () => {
     });
   }, [plans]);
 
+  const isLoading = loading || !selectedCurrency;
+
   return (
     <section ref={ref as any} id="pricing" className="py-24 lg:py-28 xl:py-32 relative overflow-hidden">
       <SectionBackground bgImages={bgImages} lazy />
@@ -47,15 +49,13 @@ const PricingPlans: FC = () => {
         <SectionHeader title={header.title} subtitle={header.subtitle} isIntersecting={isIntersecting} />
 
         {/* Pricing Cards */}
-        {loading || !selectedCurrency ? (
-          <div className="text-center text-white text-2xl">Загрузка...</div>
-        ) : (
-          <PricingPlansGrid 
-            plans={sortedPlans} 
-            isIntersecting={isIntersecting as boolean}
-            selectedCurrency={selectedCurrency}
-          />
-        )}
+        <PricingPlansGrid 
+          plans={sortedPlans}
+          bgImages={pricingPlansPopularBgImages}
+          isIntersecting={isIntersecting as boolean}
+          selectedCurrency={selectedCurrency!}
+          loading={isLoading}
+        />
 
         {/* Payment Options */}
         <PricingPlansPayment 
@@ -63,6 +63,7 @@ const PricingPlans: FC = () => {
           isIntersecting={isIntersecting as boolean}
           selectedCurrency={selectedCurrency}
           onCurrencyChange={handleCurrencyChange}
+          loading={isLoading}
         />
       </div>
     </section>
