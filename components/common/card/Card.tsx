@@ -2,10 +2,11 @@ import { ReactNode } from "react";
 import { cn } from "../../../utils/cn";
 import { PartialSectionBGImagesProps } from "../../../types/sections";
 import CardBackground from "./CardBackground";
+import { SectionBGImagesService } from "../../../services/SectionBGImagesService";
 
 export interface CardProps {
   children: ReactNode;
-  variant?: "default" | "elevated" | "outlined" | "gradient";
+  variant?: "default" | "elevated" | "outlined" | "gradient" | "popular";
   padding?: "none" | "sm" | "md" | "lg";
   className?: string;
   childrenWrapperClassName?: string;
@@ -34,6 +35,7 @@ const Card: React.FC<CardProps> = ({
     outlined: "bg-transparent border-2 border-primary-pink/20",
     gradient:
       "bg-gradient-to-br from-primary-pink/5 via-primary-blue/5 to-primary-pink/5 border border-primary-pink/15",
+    popular: "bg-white border-2 border-primary-pink/80",
   };
 
   const paddingClasses = {
@@ -55,9 +57,13 @@ const Card: React.FC<CardProps> = ({
     className
   );
 
+  const finalBgImages = variant === 'popular'
+    ? SectionBGImagesService.getBGImages('popularCard')
+    : bgImages;
+
   return (
     <div className={classes} onClick={onClick} {...props}>
-      {bgImages && <CardBackground bgImages={bgImages} lazy />}
+      {finalBgImages && <CardBackground bgImages={finalBgImages} lazy />}
       <div className={`z-10 h-full ${childrenWrapperClassName}`}>
         {children}
       </div>

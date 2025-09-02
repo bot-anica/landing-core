@@ -8,7 +8,7 @@ import { Currency } from '../../../types/sections';
 
 const PricingPlans: FC = () => {
   const [ref, isIntersecting] = useIntersectionObserver() as [React.RefObject<HTMLElement>, boolean];
-  const { header, plans, bgImages, pricingPlansPopularBgImages, loading } = usePricingPlans();
+  const { header, plans, bgImages, loading } = usePricingPlans();
   const [selectedCurrency, setSelectedCurrency] = useState<Currency | null>(null);
 
   const availableCurrencies = useMemo((): Currency[] => {
@@ -51,7 +51,6 @@ const PricingPlans: FC = () => {
         {/* Pricing Cards */}
         <PricingPlansGrid 
           plans={sortedPlans}
-          bgImages={pricingPlansPopularBgImages}
           isIntersecting={isIntersecting as boolean}
           selectedCurrency={selectedCurrency!}
           loading={isLoading}

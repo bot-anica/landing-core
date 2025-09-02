@@ -6,7 +6,7 @@ const PaymentMethodsSkeleton: FC = () => {
       {[...Array(3)].map((_, i) => (
         <div
           key={i}
-          className="h-7 bg-gray-300 rounded-full w-20"
+          className={`h-7 rounded-full w-20 ${i === 0 ? "bg-primary-pink/50" : "bg-primary-pink/20"}`}
         />
       ))}
     </div>
