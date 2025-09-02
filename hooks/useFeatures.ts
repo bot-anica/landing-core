@@ -1,14 +1,21 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { FeaturesService } from '../services/FeaturesService';
+import { FeaturesSectionData } from '../types/sections';
 
 export const useFeatures = () => {
-  const {header, features, bgImages} = useMemo(() => {
-    return FeaturesService.getData();
-  }, []);
+  const { courseUrlParam } = useParams<{ courseUrlParam: string }>();
+  const [featuresData, setFeaturesData] = useState<FeaturesSectionData | null>(null);
+
+  useEffect(() => {
+    if (courseUrlParam) {
+      FeaturesService.getData(courseUrlParam).then(setFeaturesData);
+    }
+  }, [courseUrlParam]);
 
   return {
-    header,
-    features,
-    bgImages
+    header: featuresData?.header,
+    features: featuresData?.features,
+    bgImages: featuresData?.bgImages
   };
 };

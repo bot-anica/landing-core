@@ -1,10 +1,10 @@
-import { LESSONS } from '../../constants/courseProgram';
 import { CourseProgramData, Lesson } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';
 
 export class CourseProgramService {
-  static getLessons(): Lesson[] {
+  static async getLessons(courseUrlParam: string): Promise<Lesson[]> {
+    const { LESSONS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/courseProgram.ts`);
     return LESSONS as Lesson[];
   }
 
@@ -22,11 +22,11 @@ export class CourseProgramService {
     };
   }
 
-  static getData(): CourseProgramData {
-    const header = SectionHeadersService.getHeader('courseProgram');
-    const lessons = CourseProgramService.getLessons();
+  static async getData(courseUrlParam: string): Promise<CourseProgramData> {
+    const header = await SectionHeadersService.getHeader(courseUrlParam, 'courseProgram');
+    const lessons = await CourseProgramService.getLessons(courseUrlParam);
     const breakpoints = CourseProgramService.getSwiperBreakpoints();
-    const bgImages = SectionBGImagesService.getBGImages('courseProgram');
+    const bgImages = await SectionBGImagesService.getBGImages(courseUrlParam, 'courseProgram');
     
     return {
       header,

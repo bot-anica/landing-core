@@ -1,14 +1,28 @@
-import { useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import type { SEOHeadProps } from "../components/common/SEOHead";
-import { AVAILABLE_PAGES, SEOConfig } from "../types/sections";
+import { AVAILABLE_PAGES, SEOConfig, SEOData } from "../types/sections";
 import { SEOService } from "../services/SEOService";
 
 export const useSEO = (
   pageKey?: AVAILABLE_PAGES,
   customConfig?: SEOConfig
-): SEOHeadProps => {
+): SEOHeadProps | null => {
+  const { courseUrlParam } = useParams<{ courseUrlParam: string }>();
+  const [seoData, setSeoData] = useState<SEOData | null>(null);
+
+  useEffect(() => {
+    if (courseUrlParam) {
+      SEOService.getData(courseUrlParam).then(setSeoData);
+    }
+  }, [courseUrlParam]);
+
   return useMemo(() => {
-    const { defaultSEOConfig, pageSEOConfigs } = SEOService.getData();
+    if (!seoData) {
+      return null;
+    }
+
+    const { defaultSEOConfig, pageSEOConfigs } = seoData;
 
     let config = { ...defaultSEOConfig };
 
@@ -32,7 +46,7 @@ export const useSEO = (
       twitterCard: config.twitterCard,
       noIndex: config.noIndex,
     };
-  }, [pageKey, customConfig]);
+  }, [seoData, pageKey, customConfig]);
 };
 
 // Хук для динамического обновления метаданных

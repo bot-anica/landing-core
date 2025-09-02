@@ -1,8 +1,23 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { SuccessStoriesService } from '../services/SuccessStoriesService';
+import { SuccessStoriesData } from '../types/sections';
 
 export const useSuccessStories = () => {
-  const { header, stats, testimonials, ctaBlock, bgImages } = useMemo(() => SuccessStoriesService.getData(), []);
+  const { courseUrlParam } = useParams<{ courseUrlParam: string }>();
+  const [successStoriesData, setSuccessStoriesData] = useState<SuccessStoriesData | null>(null);
 
-  return { header, stats, testimonials, ctaBlock, bgImages };
+  useEffect(() => {
+    if (courseUrlParam) {
+      SuccessStoriesService.getData(courseUrlParam).then(setSuccessStoriesData);
+    }
+  }, [courseUrlParam]);
+
+  return {
+    header: successStoriesData?.header,
+    stats: successStoriesData?.stats,
+    testimonials: successStoriesData?.testimonials,
+    ctaBlock: successStoriesData?.ctaBlock,
+    bgImages: successStoriesData?.bgImages
+  };
 };

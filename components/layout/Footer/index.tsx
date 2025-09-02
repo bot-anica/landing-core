@@ -8,7 +8,13 @@ import FooterContacts from "./FooterContacts";
 import FooterCopyright from "./FooterCopyright";
 
 const Footer: FC = () => {
-  const { courseDescription, navigationLinks } = useFooter();
+  const footerData = useFooter();
+
+  if (!footerData) {
+    return null; // Or a loading spinner
+  }
+
+  const { courseDescription, navigationLinks } = footerData;
 
   return (
     <footer className="bg-primary-dark text-white pt-8 pb-4 md:pt-10 md:pb-6 lg:pt-14 lg:pb-8 border-t border-primary-blue/30">

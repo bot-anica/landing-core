@@ -1,8 +1,22 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { ProblemSolutionService } from '../services/ProblemSolutionService';
+import { ProblemSolutionData } from '../types/sections';
 
 export const useProblemSolution = () => {
-  const { header, items, ctaBlock, bgImages } = useMemo(() => ProblemSolutionService.getData(), []);
+  const { courseUrlParam } = useParams<{ courseUrlParam: string }>();
+  const [problemSolutionData, setProblemSolutionData] = useState<ProblemSolutionData | null>(null);
 
-  return { header, items, ctaBlock, bgImages };
+  useEffect(() => {
+    if (courseUrlParam) {
+      ProblemSolutionService.getData(courseUrlParam).then(setProblemSolutionData);
+    }
+  }, [courseUrlParam]);
+
+  return {
+    header: problemSolutionData?.header,
+    items: problemSolutionData?.items,
+    ctaBlock: problemSolutionData?.ctaBlock,
+    bgImages: problemSolutionData?.bgImages
+  };
 };

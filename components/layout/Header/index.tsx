@@ -10,7 +10,7 @@ import HeaderNavigation from './HeaderNavigation';
 import HeaderMobileMenuButton from './HeaderMobileMenuButton';
 
 const Header: FC = () => {
-  const { ctaButtons, navigationLinks } = useHeader();
+  const headerData = useHeader();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,6 +42,12 @@ const Header: FC = () => {
     setIsOpen(false)
   }
 
+  if (!headerData) {
+    return null; // Or a loading spinner
+  }
+
+  const { ctaButtons, navigationLinks } = headerData;
+
   return (
     <motion.header
       className={cn(
@@ -55,7 +61,7 @@ const Header: FC = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="flex justify-between items-center h-[56px] lg:h-[72px] py-1 sm:py-2 lg:py-4">
+        <div className="flex justify-between items-center h-14 lg:h-18 py-1 sm:py-2 lg:py-4">
           <HeaderLogoLink />
           
           {/* Desktop Navigation */}

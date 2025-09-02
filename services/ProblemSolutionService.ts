@@ -1,22 +1,23 @@
-import { PROBLEM_SOLUTION_ITEMS, PROBLEM_SOLUTION_CTA_BLOCK } from '../../constants/problemSolution';
 import { ProblemSolutionCTABlock, ProblemSolutionData, ProblemSolutionItem } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';
 
 export class ProblemSolutionService {
-  static getProblemSolutionItems(): ProblemSolutionItem[] {
+  static async getProblemSolutionItems(courseUrlParam: string): Promise<ProblemSolutionItem[]> {
+    const { PROBLEM_SOLUTION_ITEMS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/problemSolution.ts`);
     return PROBLEM_SOLUTION_ITEMS;
   }
 
-  static getProblemSolutionCTABlock(): ProblemSolutionCTABlock {
+  static async getProblemSolutionCTABlock(courseUrlParam: string): Promise<ProblemSolutionCTABlock> {
+    const { PROBLEM_SOLUTION_CTA_BLOCK } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/problemSolution.ts`);
     return PROBLEM_SOLUTION_CTA_BLOCK;
   }
 
-  static getData(): ProblemSolutionData {
-    const header = SectionHeadersService.getHeader('problemSolution');
-    const items = ProblemSolutionService.getProblemSolutionItems();
-    const ctaBlock = ProblemSolutionService.getProblemSolutionCTABlock();
-    const bgImages = SectionBGImagesService.getBGImages('problemSolution');
+  static async getData(courseUrlParam: string): Promise<ProblemSolutionData> {
+    const header = await SectionHeadersService.getHeader(courseUrlParam, 'problemSolution');
+    const items = await ProblemSolutionService.getProblemSolutionItems(courseUrlParam);
+    const ctaBlock = await ProblemSolutionService.getProblemSolutionCTABlock(courseUrlParam);
+    const bgImages = await SectionBGImagesService.getBGImages(courseUrlParam, 'problemSolution');
     
     return {
       header,

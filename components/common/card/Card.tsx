@@ -57,13 +57,9 @@ const Card: React.FC<CardProps> = ({
     className
   );
 
-  const finalBgImages = variant === 'popular'
-    ? SectionBGImagesService.getBGImages('popularCard')
-    : bgImages;
-
   return (
     <div className={classes} onClick={onClick} {...props}>
-      {finalBgImages && <CardBackground bgImages={finalBgImages} lazy />}
+      {bgImages && <CardBackground bgImages={bgImages} lazy />}
       <div className={`z-10 h-full ${childrenWrapperClassName}`}>
         {children}
       </div>

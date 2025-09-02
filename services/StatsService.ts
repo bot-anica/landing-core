@@ -1,20 +1,24 @@
-import { STATS } from '../../constants/stats';
 import { Stat } from '../types/sections';
 
 export class StatsService {
-  static getAllStats(): Stat[] {
+  static async getAllStats(courseUrlParam: string): Promise<Stat[]> {
+    const { STATS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/stats.ts`);
     return STATS;
   }
 
-  static getStatByIndex(index: number): Stat | undefined {
+  static async getStatByIndex(courseUrlParam: string, index: number): Promise<Stat | undefined> {
+    const { STATS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/stats.ts`);
     return STATS[index];
   }
 
-  static getStatsCount(): number {
+  static async getStatsCount(courseUrlParam: string): Promise<number> {
+    const { STATS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/stats.ts`);
     return STATS.length;
   }
 
-  static validateStatIndex(index: number): boolean {
+  static async validateStatIndex(courseUrlParam: string, index: number): Promise<boolean> {
+    const { STATS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/stats.ts`);
     return index >= 0 && index < STATS.length;
   }
-} 
+}
+ 

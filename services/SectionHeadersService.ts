@@ -1,8 +1,9 @@
 import { SectionHeaderProps } from "../types/sections";
-import { SECTION_HEADERS } from "../../constants/common";
 
 export class SectionHeadersService {
-  static getHeader(section: keyof typeof SECTION_HEADERS): SectionHeaderProps {
-    return SECTION_HEADERS[section];
+  static async getHeader(courseUrlParam: string, section: string): Promise<SectionHeaderProps> {
+    const { SECTION_HEADERS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/common.ts`);
+    const sectionHeaders = SECTION_HEADERS as Record<string, SectionHeaderProps>;
+    return sectionHeaders[section];
   }
 }

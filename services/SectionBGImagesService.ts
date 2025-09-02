@@ -1,8 +1,9 @@
 import { PartialSectionBGImagesProps } from "../types/sections";
-import { SECTION_BG_IMAGES } from "../../constants/common";
 
 export class SectionBGImagesService {
-  static getBGImages(section: keyof typeof SECTION_BG_IMAGES): PartialSectionBGImagesProps {
-    return SECTION_BG_IMAGES[section] || {};
+  static async getBGImages(courseUrlParam: string, section: string): Promise<PartialSectionBGImagesProps> {
+    const { SECTION_BG_IMAGES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/common.ts`);
+    const sectionImages = SECTION_BG_IMAGES as Record<string, PartialSectionBGImagesProps>;
+    return sectionImages[section] || {};
   }
 }

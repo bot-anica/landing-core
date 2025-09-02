@@ -1,35 +1,39 @@
-import { HERO_BENEFITS, HERO_CTA, HERO_IMAGES, HERO_SUBTITLE, HERO_TITLE } from "../../constants/hero";
 import { CTAItem, HeroData, HeroImages, HeroTitle } from "../types/sections";
 import { SectionBGImagesService } from "./SectionBGImagesService";
 
 export class HeroService {
-  static getTitle(): HeroTitle {
+  static async getTitle(courseUrlParam: string): Promise<HeroTitle> {
+    const { HERO_TITLE } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
     return HERO_TITLE;
   }
 
-  static getSubtitle(): string {
+  static async getSubtitle(courseUrlParam: string): Promise<string> {
+    const { HERO_SUBTITLE } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
     return HERO_SUBTITLE;
   }
 
-  static getBenefits(): string[] {
+  static async getBenefits(courseUrlParam: string): Promise<string[]> {
+    const { HERO_BENEFITS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
     return HERO_BENEFITS;
   }
 
-  static getCTA(): Record<'primary' | 'secondary', CTAItem> {
+  static async getCTA(courseUrlParam: string): Promise<Record<'primary' | 'secondary', CTAItem>> {
+    const { HERO_CTA } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
     return HERO_CTA;
   }
 
-  static getImages(): Record<'rightImages' | 'imagesInText', HeroImages> {
+  static async getImages(courseUrlParam: string): Promise<Record<'rightImages' | 'imagesInText', HeroImages>> {
+    const { HERO_IMAGES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
     return HERO_IMAGES;
   }
 
-  static getData(): HeroData {
-    const title = HeroService.getTitle();
-    const subtitle = HeroService.getSubtitle();
-    const benefits = HeroService.getBenefits();
-    const cta = HeroService.getCTA();
-    const images = HeroService.getImages();
-    const bgImages = SectionBGImagesService.getBGImages('hero');
+  static async getData(courseUrlParam: string): Promise<HeroData> {
+    const title = await HeroService.getTitle(courseUrlParam);
+    const subtitle = await HeroService.getSubtitle(courseUrlParam);
+    const benefits = await HeroService.getBenefits(courseUrlParam);
+    const cta = await HeroService.getCTA(courseUrlParam);
+    const images = await HeroService.getImages(courseUrlParam);
+    const bgImages = await SectionBGImagesService.getBGImages(courseUrlParam, 'hero');
 
     return {
       title,

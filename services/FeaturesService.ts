@@ -1,17 +1,17 @@
-import { FEATURES } from '../../constants/features';
 import { Feature, FeaturesSectionData } from '../types/sections';
 import { SectionBGImagesService } from './SectionBGImagesService';
 import { SectionHeadersService } from './SectionHeadersService';
 
 export class FeaturesService {
-  static getAllFeatures(): Feature[] {
+  static async getAllFeatures(courseUrlParam: string): Promise<Feature[]> {
+    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
     return FEATURES;
   }
 
-  static getData(): FeaturesSectionData {
-    const header = SectionHeadersService.getHeader('features');
-    const features = FeaturesService.getAllFeatures();
-    const bgImages = SectionBGImagesService.getBGImages('features');
+  static async getData(courseUrlParam: string): Promise<FeaturesSectionData> {
+    const header = await SectionHeadersService.getHeader(courseUrlParam, 'features');
+    const features = await FeaturesService.getAllFeatures(courseUrlParam);
+    const bgImages = await SectionBGImagesService.getBGImages(courseUrlParam, 'features');
 
     return {
       header,
@@ -20,15 +20,18 @@ export class FeaturesService {
     }
   }
 
-  static getFeatureByIndex(index: number): Feature | undefined {
+  static async getFeatureByIndex(courseUrlParam: string, index: number): Promise<Feature | undefined> {
+    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
     return FEATURES[index];
   }
 
-  static getFeaturesCount(): number {
+  static async getFeaturesCount(courseUrlParam: string): Promise<number> {
+    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
     return FEATURES.length;
   }
 
-  static validateFeatureIndex(index: number): boolean {
+  static async validateFeatureIndex(courseUrlParam: string, index: number): Promise<boolean> {
+    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
     return index >= 0 && index < FEATURES.length;
   }
 } 

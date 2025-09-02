@@ -1,23 +1,24 @@
-import { STEPS_TO_SUCCESS, PATH_TO_SUCCESS_IMAGES } from "../../constants/pathToSuccess";
 import { PathToSuccessData, PathToSuccessImages, PathToSuccessStep } from "../types/sections";
 import { SectionBGImagesService } from "./SectionBGImagesService";
 import { SectionHeadersService } from "./SectionHeadersService";
 
 
 export class PathToSuccessService {
-  static getPathSteps(): PathToSuccessStep[] {
+  static async getPathSteps(courseUrlParam: string): Promise<PathToSuccessStep[]> {
+    const { STEPS_TO_SUCCESS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/pathToSuccess.ts`);
     return STEPS_TO_SUCCESS;
   }
 
-  static getPathToSuccessImages(): PathToSuccessImages {
+  static async getPathToSuccessImages(courseUrlParam: string): Promise<PathToSuccessImages> {
+    const { PATH_TO_SUCCESS_IMAGES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/pathToSuccess.ts`);
     return PATH_TO_SUCCESS_IMAGES;
   }
 
-  static getData(): PathToSuccessData {
-    const header = SectionHeadersService.getHeader('pathToSuccess');
-    const steps = PathToSuccessService.getPathSteps();
-    const images = PathToSuccessService.getPathToSuccessImages();
-    const bgImages = SectionBGImagesService.getBGImages('pathToSuccess');
+  static async getData(courseUrlParam: string): Promise<PathToSuccessData> {
+    const header = await SectionHeadersService.getHeader(courseUrlParam, 'pathToSuccess');
+    const steps = await PathToSuccessService.getPathSteps(courseUrlParam);
+    const images = await PathToSuccessService.getPathToSuccessImages(courseUrlParam);
+    const bgImages = await SectionBGImagesService.getBGImages(courseUrlParam, 'pathToSuccess');
 
     return {
       header,

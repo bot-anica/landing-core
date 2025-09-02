@@ -1,19 +1,21 @@
 import { AVAILABLE_PAGES, PageSEOCongfig, SEOConfig, SEOData } from '../types/sections';
-import { DEFAULT_SEO_CONFIG, PAGE_SEO_CONFIGS } from '../../constants/common';
 
 export class SEOService {
-  static getDefaultSEOConfig(): SEOConfig {
+  static async getDefaultSEOConfig(courseUrlParam: string): Promise<SEOConfig> {
+    const { DEFAULT_SEO_CONFIG } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/common.ts`);
     return DEFAULT_SEO_CONFIG;
   }
 
-  static getPageSEOConfigs(): Record<AVAILABLE_PAGES, PageSEOCongfig> {
+  static async getPageSEOConfigs(courseUrlParam: string): Promise<Record<AVAILABLE_PAGES, PageSEOCongfig>> {
+    const { PAGE_SEO_CONFIGS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/common.ts`);
     return PAGE_SEO_CONFIGS;
   }
 
-  static getData(): SEOData {
-    const defaultSEOConfig = SEOService.getDefaultSEOConfig();
-    const pageSEOConfigs = SEOService.getPageSEOConfigs();
+  static async getData(courseUrlParam: string): Promise<SEOData> {
+    const defaultSEOConfig = await SEOService.getDefaultSEOConfig(courseUrlParam);
+    const pageSEOConfigs = await SEOService.getPageSEOConfigs(courseUrlParam);
 
     return { defaultSEOConfig, pageSEOConfigs }
   }
-} 
+}
+ 

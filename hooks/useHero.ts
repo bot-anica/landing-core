@@ -1,8 +1,24 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { HeroService } from '../services/HeroService';
+import { HeroData } from '../types/sections';
 
 export const useHero = () => {
-  const { title, subtitle, benefits, cta, images, bgImages } = useMemo(() => HeroService.getData(), []);
+  const { courseUrlParam } = useParams<{ courseUrlParam: string }>();
+  const [heroData, setHeroData] = useState<HeroData | null>(null);
 
-  return { title, subtitle, benefits, cta, images, bgImages };
+  useEffect(() => {
+    if (courseUrlParam) {
+      HeroService.getData(courseUrlParam).then(setHeroData);
+    }
+  }, [courseUrlParam]);
+
+  return {
+    title: heroData?.title,
+    subtitle: heroData?.subtitle,
+    benefits: heroData?.benefits,
+    cta: heroData?.cta,
+    images: heroData?.images,
+    bgImages: heroData?.bgImages
+  };
 };

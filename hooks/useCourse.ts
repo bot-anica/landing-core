@@ -2,28 +2,42 @@ import { useState, useEffect } from 'react';
 import { CourseService } from '../services/CourseService';
 import { Course } from '../types/sections';
 
-export const useCourse = () => {
+export const useCourse = (urlParam: string | undefined) => {
   const [course, setCourse] = useState<Course | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
+      if (!urlParam) {
+        setError('Course URL parameter is not provided');
+        setIsLoading(false);
+        return;
+      }
+
       try {
-        setLoading(true);
-        const courseData = await CourseService.getCourseByUrlParam(import.meta.env.VITE_COURSE_URL_PARAM);
-        setCourse(courseData);
-      } catch (error) {
-        console.error(error);
+        setIsLoading(true);
+        setError(null);
+        const courseData = await CourseService.getCourseByUrlParam(urlParam);
+        if (courseData) {
+          setCourse(courseData);
+        } else {
+          throw new Error('Course not found');
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchCourse();
-  }, []);
+  }, [urlParam]);
 
   return {
     course,
-    loading,
+    isLoading,
+    error,
+    urlParam,
   };
 };
