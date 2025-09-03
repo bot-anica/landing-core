@@ -4,17 +4,17 @@ import { SectionHeadersService } from './SectionHeadersService';
 
 export class SuccessStoriesService {
   static async getStatistic(courseUrlParam: string): Promise<Statistic[]> {
-    const { STATISTIC } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/successStories.ts`);
+    const { STATISTIC } = await import(`../../constants/${courseUrlParam}/successStories`);
     return STATISTIC;
   }
 
   static async getTestimonials(courseUrlParam: string): Promise<Testimonial[]> {
-    const { TESTIMONIALS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/successStories.ts`);
+    const { TESTIMONIALS } = await import(`../../constants/${courseUrlParam}/successStories`);
     return TESTIMONIALS;
   }
 
   static async getCTABlock(courseUrlParam: string): Promise<SuccessStoriesCTABlock> {
-    const { SUCCESS_STORIES_CTA_BLOCK } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/successStories.ts`);
+    const { SUCCESS_STORIES_CTA_BLOCK } = await import(`../../constants/${courseUrlParam}/successStories`);
     return SUCCESS_STORIES_CTA_BLOCK;
   }
 

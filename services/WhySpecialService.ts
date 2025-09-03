@@ -5,7 +5,7 @@ import { StatsService } from './StatsService';
 
 export class WhySpecialService {
   static async getAllWhySpecialPoints(courseUrlParam: string): Promise<WhySpecialPoint[]> {
-    const { WHY_SPECIAL_POINTS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/whySpecial.ts`);
+    const { WHY_SPECIAL_POINTS } = await import(`../../constants/${courseUrlParam}/whySpecial`);
     return WHY_SPECIAL_POINTS;
   }
 
@@ -24,17 +24,17 @@ export class WhySpecialService {
   }
 
   static async validateWhySpecialPointIndex(courseUrlParam: string, index: number): Promise<boolean> {
-    const { WHY_SPECIAL_POINTS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/whySpecial.ts`);
+    const { WHY_SPECIAL_POINTS } = await import(`../../constants/${courseUrlParam}/whySpecial`);
     return index >= 0 && index < WHY_SPECIAL_POINTS.length;
   }
 
   static async getWhySpecialPointsCount(courseUrlParam: string): Promise<number> {
-    const { WHY_SPECIAL_POINTS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/whySpecial.ts`);
+    const { WHY_SPECIAL_POINTS } = await import(`../../constants/${courseUrlParam}/whySpecial`);
     return WHY_SPECIAL_POINTS.length;
   }
 
   static async getWhySpecialPointByIndex(courseUrlParam: string, index: number): Promise<WhySpecialPoint | undefined> {
-    const { WHY_SPECIAL_POINTS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/whySpecial.ts`);
+    const { WHY_SPECIAL_POINTS } = await import(`../../constants/${courseUrlParam}/whySpecial`);
     return WHY_SPECIAL_POINTS[index];
   }
 }

@@ -4,7 +4,7 @@ import { SectionBGImagesService } from './SectionBGImagesService';
 
 export class FaqService {
   static async getFaqs(courseUrlParam: string): Promise<FAQItem[]> {
-    const { FAQS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/faqData.ts`);
+    const { FAQS } = await import(`../../constants/${courseUrlParam}/faqData`);
     return FAQS;
   }
 

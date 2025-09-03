@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import { ButtonSize, ButtonVariant } from '../../types/common';
 import { HashLink } from 'react-router-hash-link';

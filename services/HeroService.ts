@@ -3,27 +3,27 @@ import { SectionBGImagesService } from "./SectionBGImagesService";
 
 export class HeroService {
   static async getTitle(courseUrlParam: string): Promise<HeroTitle> {
-    const { HERO_TITLE } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
+    const { HERO_TITLE } = await import( `../../constants/${courseUrlParam}/hero`);
     return HERO_TITLE;
   }
 
   static async getSubtitle(courseUrlParam: string): Promise<string> {
-    const { HERO_SUBTITLE } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
+    const { HERO_SUBTITLE } = await import( `../../constants/${courseUrlParam}/hero`);
     return HERO_SUBTITLE;
   }
 
   static async getBenefits(courseUrlParam: string): Promise<string[]> {
-    const { HERO_BENEFITS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
+    const { HERO_BENEFITS } = await import( `../../constants/${courseUrlParam}/hero`);
     return HERO_BENEFITS;
   }
 
   static async getCTA(courseUrlParam: string): Promise<Record<'primary' | 'secondary', CTAItem>> {
-    const { HERO_CTA } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
+    const { HERO_CTA } = await import( `../../constants/${courseUrlParam}/hero`);
     return HERO_CTA;
   }
 
   static async getImages(courseUrlParam: string): Promise<Record<'rightImages' | 'imagesInText', HeroImages>> {
-    const { HERO_IMAGES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/hero.ts`);
+    const { HERO_IMAGES } = await import( `../../constants/${courseUrlParam}/hero`);
     return HERO_IMAGES;
   }
 

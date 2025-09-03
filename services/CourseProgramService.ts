@@ -4,7 +4,7 @@ import { SectionHeadersService } from './SectionHeadersService';
 
 export class CourseProgramService {
   static async getLessons(courseUrlParam: string): Promise<Lesson[]> {
-    const { LESSONS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/courseProgram.ts`);
+    const { LESSONS } = await import(`../../constants/${courseUrlParam}/courseProgram`);
     return LESSONS as Lesson[];
   }
 

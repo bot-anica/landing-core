@@ -22,7 +22,13 @@ const ImageInTextDefault: FC<ImageInTextDefaultProps> = ({images, maxSize}) => {
   console.log(`relative z-10 md:m-auto ${mediaStyles[maxSize]}`)
 
   return (
-    <img src={defaultImage} alt="" className={`relative z-10 ${mediaStyles[maxSize]}`} />
+        <img 
+      src={defaultImage} 
+      alt="Course illustration" 
+      className={`relative z-10 ${mediaStyles[maxSize]}`} 
+      loading="lazy"
+      decoding="async"
+    />
   );
 };
 

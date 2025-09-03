@@ -2,12 +2,12 @@ import { FooterData, LinkItem } from '../types/sections';
 
 export class FooterService {
   static async getCourseDescription(courseUrlParam: string): Promise<string> {
-    const { COURSE_DESCRIPTION } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/footer.ts`);
+    const { COURSE_DESCRIPTION } = await import(`../../constants/${courseUrlParam}/footer`);
     return COURSE_DESCRIPTION;
   }
 
   static async getNavigationLinks(courseUrlParam: string): Promise<LinkItem[]> {
-    const { FOOTER_NAVIAGTION_LINKS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/footer.ts`);
+    const { FOOTER_NAVIAGTION_LINKS } = await import(`../../constants/${courseUrlParam}/footer`);
     return FOOTER_NAVIAGTION_LINKS;
   }
 

@@ -5,12 +5,12 @@ import { SectionHeadersService } from "./SectionHeadersService";
 
 export class PathToSuccessService {
   static async getPathSteps(courseUrlParam: string): Promise<PathToSuccessStep[]> {
-    const { STEPS_TO_SUCCESS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/pathToSuccess.ts`);
+    const { STEPS_TO_SUCCESS } = await import(`../../constants/${courseUrlParam}/pathToSuccess`);
     return STEPS_TO_SUCCESS;
   }
 
   static async getPathToSuccessImages(courseUrlParam: string): Promise<PathToSuccessImages> {
-    const { PATH_TO_SUCCESS_IMAGES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/pathToSuccess.ts`);
+    const { PATH_TO_SUCCESS_IMAGES } = await import(`../../constants/${courseUrlParam}/pathToSuccess`);
     return PATH_TO_SUCCESS_IMAGES;
   }
 

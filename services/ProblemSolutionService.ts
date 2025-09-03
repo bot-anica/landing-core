@@ -4,12 +4,12 @@ import { SectionHeadersService } from './SectionHeadersService';
 
 export class ProblemSolutionService {
   static async getProblemSolutionItems(courseUrlParam: string): Promise<ProblemSolutionItem[]> {
-    const { PROBLEM_SOLUTION_ITEMS } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/problemSolution.ts`);
+    const { PROBLEM_SOLUTION_ITEMS } = await import(`../../constants/${courseUrlParam}/problemSolution`);
     return PROBLEM_SOLUTION_ITEMS;
   }
 
   static async getProblemSolutionCTABlock(courseUrlParam: string): Promise<ProblemSolutionCTABlock> {
-    const { PROBLEM_SOLUTION_CTA_BLOCK } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/problemSolution.ts`);
+    const { PROBLEM_SOLUTION_CTA_BLOCK } = await import(`../../constants/${courseUrlParam}/problemSolution`);
     return PROBLEM_SOLUTION_CTA_BLOCK;
   }
 

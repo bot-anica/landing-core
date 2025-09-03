@@ -4,7 +4,7 @@ import { SectionHeadersService } from './SectionHeadersService';
 
 export class FeaturesService {
   static async getAllFeatures(courseUrlParam: string): Promise<Feature[]> {
-    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
+    const { FEATURES } = await import(`../../constants/${courseUrlParam}/features`);
     return FEATURES;
   }
 
@@ -21,17 +21,17 @@ export class FeaturesService {
   }
 
   static async getFeatureByIndex(courseUrlParam: string, index: number): Promise<Feature | undefined> {
-    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
+    const { FEATURES } = await import(`../../constants/${courseUrlParam}/features`);
     return FEATURES[index];
   }
 
   static async getFeaturesCount(courseUrlParam: string): Promise<number> {
-    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
+    const { FEATURES } = await import(`../../constants/${courseUrlParam}/features`);
     return FEATURES.length;
   }
 
   static async validateFeatureIndex(courseUrlParam: string, index: number): Promise<boolean> {
-    const { FEATURES } = await import(/* @vite-ignore */ `../../constants/${courseUrlParam}/features.ts`);
+    const { FEATURES } = await import(`../../constants/${courseUrlParam}/features`);
     return index >= 0 && index < FEATURES.length;
   }
 } 

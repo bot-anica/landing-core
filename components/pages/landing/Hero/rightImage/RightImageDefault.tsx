@@ -18,7 +18,13 @@ const mediaStyles = {
 
 const RightImageDefault: FC<RightImageDefaultProps> = ({images, minSize}) => {
   return (
-    <img src={images.small || images.smallVertical || images.medium || images.mediumVertical || images.large || images.extraLarge} alt="" className={`relative z-10 ${mediaStyles[minSize]}`} />
+    <img 
+      src={images.small || images.smallVertical || images.medium || images.mediumVertical || images.large || images.extraLarge} 
+      alt="Course illustration" 
+      className={`relative z-10 ${mediaStyles[minSize]}`} 
+      loading="lazy"
+      decoding="async"
+    />
   );
 };
 
