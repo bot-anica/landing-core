@@ -16,7 +16,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({ course, tariff, selectedCurrency 
     <div className="flex-1">
       <h2 className="text-2xl font-bold text-primary-dark mb-6">Детали заказа</h2>
       <h3 className="text-lg font-bold text-primary-dark mb-2">{course.name}</h3>
-      <span className="inline-block bg-gradient-to-r from-primary-pink to-primary-blue text-white text-base font-medium px-2.5 py-0.5 rounded-full mb-6">
+      <span className="inline-block bg-primary-pink text-white text-base font-medium px-2.5 py-0.5 rounded-full mb-6">
         {tariff.name}
       </span>
       <h4 className="text-lg font-semibold text-primary-dark mb-4">Что включено:</h4>

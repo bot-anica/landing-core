@@ -1,8 +1,11 @@
 export { default as Button } from './Button';
+export { default as CustomSelect } from './CustomSelect';
+export { default as CustomInput } from './CustomInput';
 export { default as Card } from './card/Card';
 export { default as BackgroundElements } from './BackgroundElements';
-export { default as ScrollToAncor } from './ScrollToAncor';
 export { default as SEOHead } from './SEOHead';
+export { default as ScrollToAnchor } from './ScrollToAnchor';
+export { default as ScrollToTop } from './ScrollToTop';
 
 // SECTION
 export { default as SectionHeader } from './section/SectionHeader';

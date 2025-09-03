@@ -27,7 +27,7 @@ const PricingPlansGrid: React.FC<PricingPlansGridProps> = ({ plans, popularPlanI
         <PricingPlanCard 
           key={plan.id} 
           plan={plan}
-          bgImages={plan.is_popular ? popularPlanImages : undefined}
+          bgImages={plan.is_popular ? popularPlanImages : null}
           isIntersecting={isIntersecting} 
           index={index} 
           selectedCurrency={selectedCurrency}

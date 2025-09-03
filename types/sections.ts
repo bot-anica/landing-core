@@ -211,7 +211,6 @@ export interface PricingPlan {
 
 export interface PricingSectionData {
   header: SectionHeaderProps;
-  plans: PricingPlan[];
   bgImages: PartialSectionBGImagesProps;
 }
 

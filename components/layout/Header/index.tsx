@@ -9,7 +9,11 @@ import { useHeader } from '../../../hooks/useHeader';
 import HeaderNavigation from './HeaderNavigation';
 import HeaderMobileMenuButton from './HeaderMobileMenuButton';
 
-const Header: FC = () => {
+interface HeaderProps {
+  isPrepaymentPage: boolean
+}
+
+const Header: FC<HeaderProps> = ({isPrepaymentPage}) => {
   const headerData = useHeader();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -52,9 +56,9 @@ const Header: FC = () => {
     <motion.header
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
-        isScrolled || isOpen 
+        isScrolled || isOpen
           ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-          : 'bg-white/90 backdrop-blur-sm'
+          : `${isPrepaymentPage ? 'bg-white/95' : 'bg-white/0'} backdrop-blur-none`
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

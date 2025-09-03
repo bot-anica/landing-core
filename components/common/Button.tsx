@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import { ButtonSize, ButtonVariant } from '../../types/common';
+import { HashLink } from 'react-router-hash-link';
 
 export interface ButtonProps {
   children: ReactNode;
@@ -62,9 +63,9 @@ const Button: React.FC<ButtonProps> = ({
 
   if (to) {
     return (
-      <Link to={to} className={classes} {...props}>
+      <HashLink to={to} className={classes} {...props}>
         {children}
-      </Link>
+      </HashLink>
     );
   }
 
